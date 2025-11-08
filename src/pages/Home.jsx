@@ -1,81 +1,84 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import TemplateCard from "../components/TemplateCard";
-import TemplateModal from "../components/TemplateModal";
-import { fetchTemplates } from "../services/api";
 
 export default function Home() {
-  const [templates, setTemplates] = useState([]);
-  const [selected, setSelected] = useState(null);
   const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    fetchTemplates().then((res) => setTemplates(res.templates));
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
 
-      {/* Hero Banner */}
-      <div className="text-center py-16 bg-gradient-to-r from-blue-50 to-blue-100 border-b">
-        <h1 className="text-4xl font-extrabold text-blue-700">
-          Explore Stunning UI Templates
+      {/* Hero Section */}
+      <div
+        className="h-[70vh] bg-cover bg-center flex flex-col justify-center items-center text-center px-6"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80')",
+        }}
+      >
+        <h1 className="text-5xl font-extrabold text-white drop-shadow-xl">
+          Design Faster. Launch Smarter.
         </h1>
 
-        <p className="text-gray-600 mt-3 text-lg max-w-xl mx-auto">
-          Browse high-quality template designs crafted to give your projects a head start.
+        <p className="text-white mt-4 text-lg max-w-2xl drop-shadow-md">
+          Create, save and reuse UI templates to speed up your development workflow.
         </p>
 
-        {/* Hero Preview Image */}
-        <img
-          src="https://cdn.dribbble.com/userupload/12349905/file/original-b1b0dea9c50bc06ca8f4d0f2ddaf124e.png"
-          alt="UI Preview"
-          className="mx-auto mt-8 rounded-xl shadow-lg w-[85%] max-w-[700px]"
-        />
-
-        {/* Create Button shows only when logged in */}
-        {token && (
-          <div className="mt-6">
-            <Link
-              to="/create"
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-            >
-              + Create New Template
-            </Link>
-          </div>
+        {token ? (
+          <Link
+            to="/create"
+            className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-lg text-lg shadow hover:bg-blue-700 transition"
+          >
+            + Start Creating
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="mt-8 px-8 py-3 bg-green-600 text-white rounded-lg text-lg shadow hover:bg-green-700 transition"
+          >
+            Login to Get Started
+          </Link>
         )}
       </div>
 
-      {/* Templates Section */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-          Templates Gallery
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {templates.length > 0 ? (
-            templates.map((t) => (
-              <TemplateCard
-                key={t._id}
-                template={t}
-                onClick={() => setSelected(t._id)}
-              />
-            ))
-          ) : (
-            <p className="text-gray-500 col-span-full text-center">
-              Loading templates...
-            </p>
-          )}
+      {/* Features Section */}
+      <div className="max-w-5xl mx-auto py-16 px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        
+        <div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png"
+            alt="Fast"
+            className="w-16 mx-auto mb-4 opacity-80"
+          />
+          <h3 className="text-xl font-semibold text-gray-800">Create Quickly</h3>
+          <p className="text-gray-600 mt-2">
+            Build ready-to-use templates in minutes.
+          </p>
         </div>
-      </div>
 
-      {/* Template preview modal */}
-      {selected && (
-        <TemplateModal
-          templateId={selected}
-          onClose={() => setSelected(null)}
-        />
-      )}
+        <div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+            alt="Save"
+            className="w-16 mx-auto mb-4 opacity-80"
+          />
+          <h3 className="text-xl font-semibold text-gray-800">Save & Reuse</h3>
+          <p className="text-gray-600 mt-2">
+            Store templates and reuse them across projects.
+          </p>
+        </div>
+
+        <div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1829/1829232.png"
+            alt="Share"
+            className="w-16 mx-auto mb-4 opacity-80"
+          />
+          <h3 className="text-xl font-semibold text-gray-800">Share with Team</h3>
+          <p className="text-gray-600 mt-2">
+            Collaborate and share templates easily.
+          </p>
+        </div>
+
+      </div>
     </div>
   );
 }
