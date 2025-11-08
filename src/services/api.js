@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8050/api"
+  baseURL: "https://fullstack-intern-task.onrender.com/api"
 });
 
 // Automatically attach token to every request
