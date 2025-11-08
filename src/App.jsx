@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
 import CreateTemplate from "./pages/CreateTemplate";
+import PrivateRoute from "./components/PrivateRout";
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
