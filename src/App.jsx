@@ -56,10 +56,25 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/favorites" element={<Favorites />} />
+         <Route
+  path="/favorites"
+  element={
+    <PrivateRoute>
+      <Favorites />
+    </PrivateRoute>
+  }
+/>
+
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/create" element={<CreateTemplate/>} />
+<Route
+  path="/create"
+  element={
+    <PrivateRoute>
+      <CreateTemplate />
+    </PrivateRoute>
+  }
+/>
       </Routes>
   </>
   );

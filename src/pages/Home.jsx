@@ -26,7 +26,14 @@ export default function Home() {
           Browse high-quality template designs crafted to give your projects a head start.
         </p>
 
-        {/* Show Create Button Only If Logged In */}
+        {/* Hero Preview Image */}
+        <img
+          src="https://cdn.dribbble.com/userupload/12349905/file/original-b1b0dea9c50bc06ca8f4d0f2ddaf124e.png"
+          alt="UI Preview"
+          className="mx-auto mt-8 rounded-xl shadow-lg w-[85%] max-w-[700px]"
+        />
+
+        {/* Create Button shows only when logged in */}
         {token && (
           <div className="mt-6">
             <Link
@@ -62,7 +69,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Template preview modal */}
       {selected && (
         <TemplateModal
           templateId={selected}
